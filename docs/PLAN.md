@@ -115,7 +115,7 @@ Tipos exportados:
 
 - `RecaptchaHybridProviderProps` — `{ v3: V3Config; v2: V2Config; children: ReactNode }`
 - `V3Config` — `{ key: string; action?: string }`
-- `V2Config` — `{ key: string; theme?: "light" | "dark"; size?: "normal" | "compact"; hl?: string }`
+- `V2Config` — `{ key: string; theme?: "light" | "dark"; size?: "normal" | "compact"; hl?: string; action?: string }`
 - `RecaptchaHybridContextValue`
 - `RecaptchaError` (`SCRIPT_LOAD_FAILED` | `EXECUTE_FAILED` | `EXPIRED` | `MISSING_KEY`)
 
@@ -144,7 +144,7 @@ Arquitetura **swap sequencial** sobre `@google-recaptcha/react`:
     );
   }
   ```
-  Expõe context próprio com `requestChallenge()` (seta `mode="v2"`), `resetToV3()` (seta `mode="v3"`), e ref pro último token. Repassa `v2.theme/size/hl` e `v3.action` pros consumidores via context.
+  Expõe context próprio com `requestChallenge()` (seta `mode="v2"`), `resetToV3()` (seta `mode="v3"`), e ref pro último token. Repassa `v2.theme/size/hl/action` e `v3.action` pros consumidores via context.
 - `src/hooks/useRecaptchaHybrid.ts` — wraps tanto context próprio quanto `useGoogleReCaptcha` da lib base. Em modo v3, `executeV3()` delega pro hook base. Em modo v2, `executeV3` lança erro guiado.
 - `src/components/RecaptchaHybrid.tsx` — quando `mode==="v2"`, renderiza `<GoogleReCaptchaCheckbox onChange={onV2Token}>` da lib base. Quando `mode==="v3"`, renderiza null (badge é responsabilidade do provider v3).
 - `src/internal/cleanup.ts` — utility que tenta remover `<script src=".../recaptcha/api.js...">` injetado pelo provider antigo no momento do swap, evitando conflito de definição em `window.grecaptcha`. Se POC mostrar que lib base já trata, deletar este arquivo.

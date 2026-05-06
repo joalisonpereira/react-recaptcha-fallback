@@ -363,7 +363,7 @@
   resolved "https://registry.npmjs.org/@google-recaptcha/core/-/core-1.1.3.tgz#3c875544b344dfa82ee78109047a875ac00049cc"
   integrity sha512-ArN5g4eoXp5YFjMBu5fKhmWZ2HuUyYTjg5RoAQRstpJYbkRgLooZveDQavLRqrClTuAHBDXTEXGRmyCIhj5GJg==
 
-"@google-recaptcha/react@^2.4.2":
+"@google-recaptcha/react@>=2":
   version "2.4.2"
   resolved "https://registry.npmjs.org/@google-recaptcha/react/-/react-2.4.2.tgz#9ef4bd014c7e4459491989beb3b71316407d2e2e"
   integrity sha512-qscSi9PSikMA0xGUzDaqaI1SMZAc2nALRmqdLAbtxQPvaaDZglXBpynhLYWpL1ijyY/nfiFFTSKZ79xJVS3BnA==
