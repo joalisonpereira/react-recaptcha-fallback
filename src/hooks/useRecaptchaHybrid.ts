@@ -1,0 +1,47 @@
+import { useCallback } from 'react';
+import { useGoogleReCaptcha } from '@google-recaptcha/react';
+import { useRecaptchaHybridContext } from '../provider';
+import type { RecaptchaError } from '../types';
+
+export interface UseRecaptchaHybridReturn {
+  executeV3: (action?: string) => Promise<string>;
+  requestV2Challenge: () => void;
+  reset: () => void;
+  isReady: boolean;
+  isLoading: boolean;
+  mode: 'v3' | 'v2';
+}
+
+export function useRecaptchaHybrid(): UseRecaptchaHybridReturn {
+  const { mode, requestChallenge, resetToV3 } = useRecaptchaHybridContext();
+
+  const { executeV3: baseExecuteV3, isLoading } = useGoogleReCaptcha();
+
+  const executeV3 = useCallback(
+    async (action?: string): Promise<string> => {
+      if (mode !== 'v3') {
+        const err: RecaptchaError = 'EXECUTE_FAILED';
+
+        throw new Error(`${err}: not in v3 mode`);
+      }
+
+      if (!baseExecuteV3) {
+        const err: RecaptchaError = 'EXECUTE_FAILED';
+
+        throw new Error(`${err}: recaptcha not ready`);
+      }
+
+      return baseExecuteV3(action ?? 'submit');
+    },
+    [mode, baseExecuteV3]
+  );
+
+  return {
+    executeV3,
+    requestV2Challenge: requestChallenge,
+    reset: resetToV3,
+    isReady: !isLoading && !!baseExecuteV3,
+    isLoading,
+    mode
+  };
+}

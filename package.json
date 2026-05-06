@@ -1,0 +1,65 @@
+{
+  "name": "react-recaptcha-hybrid",
+  "version": "0.1.0",
+  "description": "React reCAPTCHA v3 with automatic v2 checkbox fallback",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "example": "yarn --cwd examples/vite-demo dev",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "format": "prettier --write src"
+  },
+  "peerDependencies": {
+    "@google-recaptcha/react": ">=2",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@google-recaptcha/react": "^2.4.2",
+    "@types/react": "^19.1.2",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "@vitejs/plugin-react": "^4.5.0",
+    "eslint": "^9",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "prettier": "^3.8.3",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "typescript": "^5.8.0",
+    "vite": "^6.3.0",
+    "vite-plugin-dts": "^4.5.0"
+  },
+  "keywords": [
+    "react",
+    "recaptcha",
+    "recaptcha-v3",
+    "recaptcha-v2",
+    "captcha",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joalisonpereira/react-recaptcha-hybrid"
+  },
+  "homepage": "https://github.com/joalisonpereira/react-recaptcha-hybrid#readme",
+  "bugs": {
+    "url": "https://github.com/joalisonpereira/react-recaptcha-hybrid/issues"
+  }
+}
