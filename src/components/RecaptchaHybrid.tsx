@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { GoogleReCaptchaCheckbox } from '@google-recaptcha/react';
+import { memo, useEffect, useRef } from 'react';
+import { useGoogleReCaptcha } from '@google-recaptcha/react';
 import { useRecaptchaHybridContext } from '../provider';
 import type { RecaptchaError } from '../types';
 
@@ -11,32 +11,66 @@ export interface RecaptchaHybridProps {
   className?: string;
 }
 
-export function RecaptchaHybrid({
-  showChallenge,
+function V2Checkbox({
+  v2Config,
   onV2Token,
   onError,
   className
-}: RecaptchaHybridProps) {
-  const { mode, requestChallenge, v2Config } = useRecaptchaHybridContext();
+}: Pick<RecaptchaHybridProps, 'onV2Token' | 'onError' | 'className'> & {
+  v2Config: ReturnType<typeof useRecaptchaHybridContext>['v2Config'];
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { render } = useGoogleReCaptcha();
 
   useEffect(() => {
-    if (showChallenge && mode === 'v3') {
-      requestChallenge();
-    }
-  }, [showChallenge, mode, requestChallenge]);
+    if (!render || !containerRef.current) return;
 
-  if (!showChallenge || mode !== 'v2') return null;
+    const wrapper = document.createElement('div');
 
-  return (
-    <div className={className}>
-      <GoogleReCaptchaCheckbox
-        theme={v2Config.theme}
-        size={v2Config.size}
-        language={v2Config.language}
-        onChange={(token) => onV2Token?.(token)}
-        onExpired={() => onError?.('EXPIRED')}
-        onError={() => onError?.('EXECUTE_FAILED')}
-      />
-    </div>
-  );
+    render(wrapper, {
+      sitekey: v2Config.key,
+      ...(v2Config.theme && { theme: v2Config.theme }),
+      ...(v2Config.size && { size: v2Config.size }),
+      ...(v2Config.language && { hl: v2Config.language }),
+      callback: (token: string) => onV2Token?.(token),
+      'expired-callback': () => onError?.('EXPIRED'),
+      'error-callback': () => onError?.('EXECUTE_FAILED')
+    });
+
+    const container = containerRef.current;
+
+    container.appendChild(wrapper);
+
+    return () => {
+      container.innerHTML = '';
+    };
+  }, [render, v2Config.key, v2Config.theme, v2Config.size, v2Config.language, onV2Token, onError]);
+
+  return <div ref={containerRef} className={className} />;
 }
+
+export const RecaptchaHybrid = memo(
+  ({ showChallenge, onV2Token, onError, className }: RecaptchaHybridProps) => {
+    const { mode, requestChallenge, v2Config } = useRecaptchaHybridContext();
+
+    useEffect(() => {
+      if (showChallenge && mode === 'v3') {
+        requestChallenge();
+      }
+    }, [showChallenge, mode, requestChallenge]);
+
+    if (!showChallenge || mode !== 'v2') return null;
+
+    return (
+      <V2Checkbox
+        v2Config={v2Config}
+        onV2Token={onV2Token}
+        onError={onError}
+        className={className}
+      />
+    );
+  }
+);
+
+RecaptchaHybrid.displayName = 'RecaptchaHybrid';

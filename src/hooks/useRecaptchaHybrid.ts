@@ -6,7 +6,8 @@ import type { RecaptchaError } from '../types';
 export interface UseRecaptchaHybridReturn {
   executeV3: (action?: string) => Promise<string>;
   requestV2Challenge: () => void;
-  reset: () => void;
+  resetToV3: () => void;
+  resetChallenge: ReturnType<typeof useGoogleReCaptcha>['reset'];
   isReady: boolean;
   isLoading: boolean;
   mode: 'v3' | 'v2';
@@ -14,6 +15,8 @@ export interface UseRecaptchaHybridReturn {
 
 export function useRecaptchaHybrid(): UseRecaptchaHybridReturn {
   const { mode, requestChallenge, resetToV3 } = useRecaptchaHybridContext();
+
+  const { reset: resetChallenge } = useGoogleReCaptcha();
 
   const { executeV3: baseExecuteV3, isLoading } = useGoogleReCaptcha();
 
@@ -39,7 +42,8 @@ export function useRecaptchaHybrid(): UseRecaptchaHybridReturn {
   return {
     executeV3,
     requestV2Challenge: requestChallenge,
-    reset: resetToV3,
+    resetToV3,
+    resetChallenge,
     isReady: !isLoading && !!baseExecuteV3,
     isLoading,
     mode
