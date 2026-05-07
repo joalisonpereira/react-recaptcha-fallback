@@ -1,15 +1,15 @@
 import { useState } from "react";
 import {
-  RecaptchaHybridProvider,
-  RecaptchaHybrid,
-  useRecaptchaHybrid,
+  RecaptchaFallbackProvider,
+  RecaptchaFallback,
+  useRecaptchaFallback,
 } from "react-recaptcha-fallback";
 
 const V3_KEY = "6LeVgV0qAAAAAPyUb79VDXWDpF0Q4XOebSpcnl5_";
 const V2_KEY = "6LefCNosAAAAAPq-1ybYbPZKqO935mV1ioqarDEB";
 
 function LoginForm() {
-  const { executeV3, isReady, mode } = useRecaptchaHybrid();
+  const { executeV3, isReady, mode } = useRecaptchaFallback();
 
   const [showChallenge, setShowChallenge] = useState(false);
 
@@ -76,10 +76,10 @@ function LoginForm() {
         </button>
       </div>
 
-      <RecaptchaHybrid
+      <RecaptchaFallback
         showChallenge={showChallenge}
         onV2Token={handleV2Token}
-        onError={(e) => addLog(`RecaptchaHybrid error: ${e}`)}
+        onError={(e) => addLog(`RecaptchaFallback error: ${e}`)}
         className="recaptcha-widget"
       />
 
@@ -114,12 +114,12 @@ export default function App() {
         <code>VITE_RECAPTCHA_V2_KEY</code> in <code>.env</code> to use real
         keys.
       </p>
-      <RecaptchaHybridProvider
+      <RecaptchaFallbackProvider
         v3={{ key: V3_KEY }}
         v2={{ key: V2_KEY, theme: "light", size: "normal", hl: "pt-BR" }}
       >
         <LoginForm />
-      </RecaptchaHybridProvider>
+      </RecaptchaFallbackProvider>
     </div>
   );
 }

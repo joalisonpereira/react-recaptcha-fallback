@@ -1,10 +1,10 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 import { GoogleReCaptchaProvider } from '@google-recaptcha/react';
-import type { RecaptchaHybridContextValue, RecaptchaHybridProviderProps } from './types';
+import type { RecaptchaFallbackContextValue, RecaptchaFallbackProviderProps } from './types';
 
-const RecaptchaHybridContext = createContext<RecaptchaHybridContextValue | null>(null);
+const RecaptchaFallbackContext = createContext<RecaptchaFallbackContextValue | null>(null);
 
-export function RecaptchaHybridProvider({ v3, v2, children }: RecaptchaHybridProviderProps) {
+export function RecaptchaFallbackProvider({ v3, v2, children }: RecaptchaFallbackProviderProps) {
   const [mode, setMode] = useState<'v3' | 'v2'>('v3');
 
   const requestChallenge = useCallback(() => setMode('v2'), []);
@@ -12,21 +12,21 @@ export function RecaptchaHybridProvider({ v3, v2, children }: RecaptchaHybridPro
   const resetToV3 = useCallback(() => setMode('v3'), []);
 
   return (
-    <RecaptchaHybridContext.Provider
+    <RecaptchaFallbackContext.Provider
       value={{ mode, requestChallenge, resetToV3, v3Config: v3, v2Config: v2 }}
     >
       <GoogleReCaptchaProvider type="v3" siteKey={v3.key} language={v2.language}>
         {children}
       </GoogleReCaptchaProvider>
-    </RecaptchaHybridContext.Provider>
+    </RecaptchaFallbackContext.Provider>
   );
 }
 
-export function useRecaptchaHybridContext(): RecaptchaHybridContextValue {
-  const ctx = useContext(RecaptchaHybridContext);
+export function useRecaptchaFallbackContext(): RecaptchaFallbackContextValue {
+  const ctx = useContext(RecaptchaFallbackContext);
 
   if (!ctx) {
-    throw new Error('useRecaptchaHybridContext must be used inside RecaptchaHybridProvider');
+    throw new Error('useRecaptchaFallbackContext must be used inside RecaptchaFallbackProvider');
   }
 
   return ctx;

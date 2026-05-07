@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useGoogleReCaptcha } from '@google-recaptcha/react';
-import { useRecaptchaHybridContext } from '../provider';
+import { useRecaptchaFallbackContext } from '../provider';
 import type { RecaptchaError } from '../types';
 
-export interface UseRecaptchaHybridReturn {
+export interface UseRecaptchaFallbackReturn {
   executeV3: (action?: string) => Promise<string>;
   requestV2Challenge: () => void;
   resetToV3: () => void;
@@ -13,8 +13,8 @@ export interface UseRecaptchaHybridReturn {
   mode: 'v3' | 'v2';
 }
 
-export function useRecaptchaHybrid(): UseRecaptchaHybridReturn {
-  const { mode, requestChallenge, resetToV3 } = useRecaptchaHybridContext();
+export function useRecaptchaFallback(): UseRecaptchaFallbackReturn {
+  const { mode, requestChallenge, resetToV3 } = useRecaptchaFallbackContext();
 
   const { reset: resetChallenge } = useGoogleReCaptcha();
 

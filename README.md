@@ -20,24 +20,24 @@ yarn add react-recaptcha-fallback
 
 ```tsx
 import {
-  RecaptchaHybridProvider,
-  RecaptchaHybrid,
-  useRecaptchaHybrid
+  RecaptchaFallbackProvider,
+  RecaptchaFallback,
+  useRecaptchaFallback
 } from 'react-recaptcha-fallback';
 
 function App() {
   return (
-    <RecaptchaHybridProvider
+    <RecaptchaFallbackProvider
       v3={{ key: 'YOUR_V3_SITE_KEY', action: 'login' }}
       v2={{ key: 'YOUR_V2_SITE_KEY', theme: 'light', size: 'normal', language: 'en' }}
     >
       <LoginForm />
-    </RecaptchaHybridProvider>
+    </RecaptchaFallbackProvider>
   );
 }
 
 function LoginForm() {
-  const { executeV3, isReady } = useRecaptchaHybrid();
+  const { executeV3, isReady } = useRecaptchaFallback();
   const [showChallenge, setShowChallenge] = useState(false);
 
   async function handleSubmit() {
@@ -49,7 +49,7 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit}>
       {/* form fields */}
-      <RecaptchaHybrid
+      <RecaptchaFallback
         showChallenge={showChallenge}
         onV2Token={(token) => {
           setShowChallenge(false);
@@ -94,7 +94,7 @@ App sends tokenV3 to backend → siteverify
 
 ## Provider props
 
-### `RecaptchaHybridProvider`
+### `RecaptchaFallbackProvider`
 
 | Prop          | Type                    | Required | Description                                          |
 | ------------- | ----------------------- | -------- | ---------------------------------------------------- |
@@ -105,12 +105,12 @@ App sends tokenV3 to backend → siteverify
 | `v2.size`     | `"normal" \| "compact"` |          | Widget size                                          |
 | `v2.language` | `string`                |          | Locale (e.g. `"pt-BR"`, `"en"`)                      |
 
-## Hook: `useRecaptchaHybrid`
+## Hook: `useRecaptchaFallback`
 
-Must be used inside `RecaptchaHybridProvider`.
+Must be used inside `RecaptchaFallbackProvider`.
 
 ```tsx
-const { executeV3, requestV2Challenge, resetToV3, isReady, isLoading, mode } = useRecaptchaHybrid();
+const { executeV3, requestV2Challenge, resetToV3, isReady, isLoading, mode } = useRecaptchaFallback();
 ```
 
 | Return               | Type                                   | Description                        |
@@ -122,12 +122,12 @@ const { executeV3, requestV2Challenge, resetToV3, isReady, isLoading, mode } = u
 | `isLoading`          | `boolean`                              | Script loading in progress         |
 | `mode`               | `"v3" \| "v2"`                         | Current active mode                |
 
-## Component: `RecaptchaHybrid`
+## Component: `RecaptchaFallback`
 
 Declarative wrapper. Handles the transition automatically when `showChallenge` changes.
 
 ```tsx
-<RecaptchaHybrid
+<RecaptchaFallback
   showChallenge={boolean}      // required — controlled by your app
   onV2Token={(token) => void}  // fires when checkbox is checked
   onError={(error) => void}    // RecaptchaError codes

@@ -13,13 +13,13 @@ export interface V2Config {
   language?: string;
 }
 
-export interface RecaptchaHybridProviderProps {
+export interface RecaptchaFallbackProviderProps {
   v3: V3Config;
   v2: V2Config;
   children: ReactNode;
 }
 
-export interface RecaptchaHybridContextValue {
+export interface RecaptchaFallbackContextValue {
   mode: 'v3' | 'v2';
   requestChallenge: () => void;
   resetToV3: () => void;

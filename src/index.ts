@@ -1,15 +1,15 @@
-export { RecaptchaHybridProvider } from './provider';
-export { useRecaptchaHybrid } from './hooks/useRecaptchaHybrid';
-export { RecaptchaHybrid } from './components/RecaptchaHybrid';
+export { RecaptchaFallbackProvider } from './provider';
+export { useRecaptchaFallback } from './hooks/useRecaptchaFallback';
+export { RecaptchaFallback } from './components/RecaptchaFallback';
 
 export type {
-  RecaptchaHybridProviderProps,
-  RecaptchaHybridContextValue,
+  RecaptchaFallbackProviderProps,
+  RecaptchaFallbackContextValue,
   V3Config,
   V2Config,
   RecaptchaError
 } from './types';
 
-export type { RecaptchaHybridProps } from './components/RecaptchaHybrid';
+export type { RecaptchaFallbackProps } from './components/RecaptchaFallback';
 
-export type { UseRecaptchaHybridReturn } from './hooks/useRecaptchaHybrid';
+export type { UseRecaptchaFallbackReturn } from './hooks/useRecaptchaFallback';

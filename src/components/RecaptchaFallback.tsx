@@ -1,9 +1,9 @@
 import { memo, useEffect, useRef } from 'react';
 import { useGoogleReCaptcha } from '@google-recaptcha/react';
-import { useRecaptchaHybridContext } from '../provider';
+import { useRecaptchaFallbackContext } from '../provider';
 import type { RecaptchaError } from '../types';
 
-export interface RecaptchaHybridProps {
+export interface RecaptchaFallbackProps {
   showChallenge: boolean;
   onV3Token?: (token: string) => void;
   onV2Token?: (token: string) => void;
@@ -16,8 +16,8 @@ function V2Checkbox({
   onV2Token,
   onError,
   className
-}: Pick<RecaptchaHybridProps, 'onV2Token' | 'onError' | 'className'> & {
-  v2Config: ReturnType<typeof useRecaptchaHybridContext>['v2Config'];
+}: Pick<RecaptchaFallbackProps, 'onV2Token' | 'onError' | 'className'> & {
+  v2Config: ReturnType<typeof useRecaptchaFallbackContext>['v2Config'];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -50,9 +50,9 @@ function V2Checkbox({
   return <div ref={containerRef} className={className} />;
 }
 
-export const RecaptchaHybrid = memo(
-  ({ showChallenge, onV2Token, onError, className }: RecaptchaHybridProps) => {
-    const { mode, requestChallenge, v2Config } = useRecaptchaHybridContext();
+export const RecaptchaFallback = memo(
+  ({ showChallenge, onV2Token, onError, className }: RecaptchaFallbackProps) => {
+    const { mode, requestChallenge, v2Config } = useRecaptchaFallbackContext();
 
     useEffect(() => {
       if (showChallenge && mode === 'v3') {
@@ -73,4 +73,4 @@ export const RecaptchaHybrid = memo(
   }
 );
 
-RecaptchaHybrid.displayName = 'RecaptchaHybrid';
+RecaptchaFallback.displayName = 'RecaptchaFallback';
