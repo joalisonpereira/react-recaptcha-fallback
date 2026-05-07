@@ -11,7 +11,7 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "react-recaptcha-hybrid": ["../../src/index.ts"]
+      "react-recaptcha-fallback": ["../../src/index.ts"]
     }
   },
   "include": ["src"]

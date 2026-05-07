@@ -1,4 +1,4 @@
-# Claude Code conventions — react-recaptcha-hybrid
+# Claude Code conventions — react-recaptcha-fallback
 
 ## Naming
 

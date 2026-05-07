@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'react-recaptcha-hybrid': path.resolve(__dirname, '../../src/index.ts'),
+      'react-recaptcha-fallback': path.resolve(__dirname, '../../src/index.ts'),
     },
   },
 });

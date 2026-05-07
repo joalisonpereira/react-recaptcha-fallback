@@ -1,4 +1,4 @@
-# react-recaptcha-hybrid 🔒
+# react-recaptcha-fallback 🔒
 
 React library for reCAPTCHA v3 with automatic v2 checkbox fallback.
 
@@ -6,14 +6,14 @@ Built on top of [`@google-recaptcha/react`](https://www.npmjs.com/package/@googl
 
 ## Why this exists
 
-Most reCAPTCHA libraries for React support either v3 or v2, but not both. `react-recaptcha-hybrid` handles the full v3 → v2 fallback flow — including the mode transition and token handoff — so you don't have to wire it up yourself.
+Most reCAPTCHA libraries for React support either v3 or v2, but not both. `react-recaptcha-fallback` handles the full v3 → v2 fallback flow — including the mode transition and token handoff — so you don't have to wire it up yourself.
 
 ## Install
 
 ```bash
-npm install react-recaptcha-hybrid
+npm install react-recaptcha-fallback
 # or
-yarn add react-recaptcha-hybrid
+yarn add react-recaptcha-fallback
 ```
 
 ## Quick start
@@ -23,7 +23,7 @@ import {
   RecaptchaHybridProvider,
   RecaptchaHybrid,
   useRecaptchaHybrid
-} from 'react-recaptcha-hybrid';
+} from 'react-recaptcha-fallback';
 
 function App() {
   return (

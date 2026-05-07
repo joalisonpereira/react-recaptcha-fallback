@@ -3,7 +3,7 @@ import {
   RecaptchaHybridProvider,
   RecaptchaHybrid,
   useRecaptchaHybrid,
-} from "react-recaptcha-hybrid";
+} from "react-recaptcha-fallback";
 
 const V3_KEY = "6LeVgV0qAAAAAPyUb79VDXWDpF0Q4XOebSpcnl5_";
 const V2_KEY = "6LefCNosAAAAAPq-1ybYbPZKqO935mV1ioqarDEB";
@@ -108,7 +108,7 @@ function LoginForm() {
 export default function App() {
   return (
     <div>
-      <h1>react-recaptcha-hybrid</h1>
+      <h1>react-recaptcha-fallback</h1>
       <p>
         Set <code>VITE_RECAPTCHA_V3_KEY</code> and{" "}
         <code>VITE_RECAPTCHA_V2_KEY</code> in <code>.env</code> to use real

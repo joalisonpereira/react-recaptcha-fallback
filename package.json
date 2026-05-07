@@ -1,5 +1,5 @@
 {
-  "name": "react-recaptcha-hybrid",
+  "name": "react-recaptcha-fallback",
   "version": "0.0.1",
   "description": "React reCAPTCHA v3 with automatic v2 checkbox fallback",
   "license": "MIT",
@@ -57,10 +57,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/joalisonpereira/react-recaptcha-hybrid"
+    "url": "https://github.com/joalisonpereira/react-recaptcha-fallback"
   },
-  "homepage": "https://github.com/joalisonpereira/react-recaptcha-hybrid#readme",
+  "homepage": "https://github.com/joalisonpereira/react-recaptcha-fallback#readme",
   "bugs": {
-    "url": "https://github.com/joalisonpereira/react-recaptcha-hybrid/issues"
+    "url": "https://github.com/joalisonpereira/react-recaptcha-fallback/issues"
   }
 }
